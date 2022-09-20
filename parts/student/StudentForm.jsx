@@ -29,7 +29,7 @@ import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded
 import CalculateRoundedIcon from '@mui/icons-material/CalculateRounded';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { openAlert } from '../../features/modal/modalSlice';
 import CustomAlert from '../../components/other/CustomAlert';
@@ -66,6 +66,8 @@ import {
 
 function StudentForm({ data = defaultValues }) {
   const dispatch = useDispatch();
+  const isAdmin =
+    useSelector((state) => state?.user?.currentUser?.isAdmin) || false;
   const router = useRouter();
 
   const hasId = data?.id ? true : false;
@@ -99,8 +101,6 @@ function StudentForm({ data = defaultValues }) {
 
   // form submit method
   const onSubmit = (data) => {
-    console.log(data);
-
     const { profile_image, ...restData } = data;
     const formData = { profile_image: data.profile_image, ...restData };
 
@@ -109,7 +109,11 @@ function StudentForm({ data = defaultValues }) {
     } else {
       createStudent(formData);
     }
-    router.push('/student');
+    if (isAdmin) {
+      router.push('/student');
+    } else {
+      router.push('/dashboard/teacher');
+    }
   };
 
   const handleProfilePreview = (e) => {
