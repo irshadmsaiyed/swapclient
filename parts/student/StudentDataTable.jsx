@@ -17,6 +17,7 @@ import DataTableColumns from '../../components/data-table/DataTableColumns';
 import StudentDataRows from './StudentDataRows';
 import useDeleteRecord from '../../hooks/useDeleteRecord';
 import useDialog from '../../hooks/useDialog';
+import Link from 'next/link';
 
 const columns = [
   { headerName: '#ID', fieldName: '1' },
@@ -47,7 +48,7 @@ export default function StudentDataTable() {
   const { isDialogOpen, handleOpenDialog, handleCloseDialog } = useDialog();
 
   const handleCreate = () => {
-    router.push('student/new');
+    router.push('https://swapclient.vercel.app/student/new');
   };
 
   const handleEdit = (id) => {
