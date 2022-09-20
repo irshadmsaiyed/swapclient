@@ -52,7 +52,7 @@ export default function StudentDataTable() {
   };
 
   const handleEdit = (id) => {
-    router.push(`student/${id}`);
+    router.push(`https://swapclient.vercel.app/student/${id}`);
   };
 
   const handleDelete = () => {
